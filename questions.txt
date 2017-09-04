@@ -1,0 +1,4 @@
+0. The framework allows the board to have dimensions from 3x3 up to 9x9.
+1. The gameboard is represented using an array.
+2. greet()
+3. init(), draw(), move(), won()
