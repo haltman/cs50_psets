@@ -1,0 +1,12 @@
+1.  stdint.h is a header file that contains types of integers with specified widths, such as int32_t which represents a signed integer with a width of 32 bits.
+2.  The point of using these is to specify integers of varying types and widths to then be aliased and used to create custom data types that are easier to use/communicate throughout the program.
+3.  BYTE = 1 byte, DWORD = 4 bytes, LONG = 4 bytes, WORD = 2 bytes
+4.  BM
+5.  bfSize is the size, in bytes, of the bitmap file. Whereas biSize, is the number of bytes required by the structure itself.
+6.  If biHeight is negative, the bitmap is a top-down DIB (device independent bitmap) and its origin is the upper-left corner.
+7.  biBitCount
+8.  fopen() might return NULL in lines 24 and 32 of copy.c if the file that the file pointer is pointing too doesn't exist.
+9.  The third argument to fread is always 1 in our code, because there is only one unit of each size of information to be stored in the buffer: size 'BITMAPFILEHEADER' (14 bytes) and 'BITMAPINFOHEADER' (40 bytes).
+10. 3
+11. fseek() allows you to change/move the location/indicator of the file pointer back or forward.
+12. SEEK_CUR is of type integer that contains the current location of the filer pointer.
