@@ -1,0 +1,27 @@
+0.  A lung disease caused by inhaling specific types of dust particles, and one of the longest English words.
+1.  getrusage is a function that returns the success or failure of a resource's processing usage.
+    The function contains a struct that maintains the time spent for such usage, for example, and other usage statistics.
+2.  16 members
+3.  We pass before and after by reference (instead of by value) to calculate() in order to reduce the amount of memory
+    required and increase its efficiency. The rusage struct, AKA before and after, contains 16 members and is quite large.
+4.      main reads words from a file by using the function fgetc(), reading character by character, until reaching the end of the file.
+    If the character is alpabetical or an apostrophe, it is appended to an array of size 'largest word in the english language'
+    plus one, and the array index is increased by one. The 'plus one' of the array's size is for '\0' to represent the end of the word.
+    After appending such a character to the array, another condition tests if the array's index is greater than the longest word in the
+    english language. If yes, that word is ignored by iterating through each of the remaining characters in that word (until the pointer
+    reaches a blank space after the word) and re-setting the array index to 0.
+        If the character returned by fgetc() is not alphabetical or an apostrophe, that word is also ignored by iterating through each
+    of the remaining characters in that word (until reaching a blank space after the word) and re-setting the array index to 0.
+        If the character returned by fgetc() is not alphabetical, an apostrohpe, or a numerical digit AND the array index is greater
+    than zero (a word exists in the array) than append a '\0' to the end of the array and iterate the word counter by one. Then store
+    the true/false result of passing the word/array into the check() function and use getrusage() to track to the check() function's usage.
+    getrusage() determines the before and after usage of the check process being executed. The calculate() function then determines
+    the time spent to process the check() function, using those rusage structs as parameters. This time value is set equal to a variable
+    that continues to add to itself as each word is passed through the check() function from the text file.
+        If the word ran through the check() function was in fact mispelled, it is printed and the mispellings counter is
+    increased by one.
+        Lastly, the array index counter is re-set to 0 in preparation of a new word.
+5.  fgetc() was used rather than fscanf() in order to ensure that each word being read in from the provided text file
+    was in fact a valid word made up entirely of alphabetic characters and apostrophes.
+6.  I think you declared the parameters of check and load as const, so that the contents (words) of both the text file and
+    the dictionary are not modified while being loaded into memory and checked.
