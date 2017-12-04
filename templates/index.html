@@ -1,0 +1,62 @@
+{% extends "layout.html" %}
+
+{% block title %}
+    Home
+{% endblock %}
+
+{% block main %}
+    <div id="index" style="padding:10px">
+        <p style="font-size:160%;">
+            Welcome back <b><span class="light_blue">{{ username }}</span></b>!
+        </p>
+        <p style="font-size:160%;">
+            Your high score is <b><span class="light_blue">{{ score }}</span></b>. <a href="{{ url_for('new') }}">Ready to play?</a>
+        </p>
+    </div>
+    <div class="slideshow-container">
+        <div class="slides fade">
+            <!-- 00 - https://www.fastweb.com/uploads/article_photo/photo/2035659/crop635w_scholarships-for-women.jpg -->
+            <img class="resize_index" src="{{ url_for('static', filename='00.jpeg') }}"/>
+        </div>
+        <div class="slides fade">
+            <!-- 01 - https://thedeclarationatcoloniahigh.com/wp-content/uploads/2014/09/elizabeth-eckford.jpg -->
+            <img class="resize_index" src="{{ url_for('static', filename='01.jpeg') }}"/>
+        </div>
+        <div class="slides fade">
+            <!-- 02 - https://media4.s-nbcnews.com/j/newscms/2017_03/1874686/2017-01-21t221808z_1166458617_rc1eb6aaef80_rtrmadp_3_usa-trump-women_bba3c791b931d0188a34677170fbb0fa.nbcnews-ux-2880-1000.jpg -->
+            <img class="resize_index2" src="{{ url_for('static', filename='02.jpeg') }}"/>
+        </div>
+        <div class="slides fade">
+            <!-- 03 - https://www.civilwar.org/sites/default/files/styles/scale_crop_380x370/public/thumbnails/image/Harriet%20Tubman.jpg?itok=lfLBFkIi -->
+            <img class="resize_index" src="{{ url_for('static', filename='03.jpeg') }}"/>
+        </div>
+        <div class="slides fade">
+            <!-- 04 - https://www.usmagazine.com/wp-content/uploads/michelle-obama-ellen-degeneres-2ce531f7-756e-4d9a-86eb-d613cfa0f4d9.jpg?w=1024&h=683 -->
+            <img class="resize_index" src="{{ url_for('static', filename='04.jpeg') }}"/>
+        </div>
+        <div class="slides fade">
+            <!-- 05 - https://pixel.nymag.com/imgs/daily/vulture/2017/04/25/24-beyonce.w190.h190.2x.jpg -->
+            <img class="resize_index" src="{{ url_for('static', filename='05.jpeg') }}"/>
+        </div>
+        <div class="slides fade">
+            <!-- 06 - https://img.huffingtonpost.com/asset/58b588f9280000200063100f.jpeg?ops=scalefit_970_noupscale -->
+            <img class="resize_index" src="{{ url_for('static', filename='06.jpeg') }}"/>
+        </div>
+        <div class="slides fade">
+            <!-- 07 - http://nerdywithchildren.com/wp-content/uploads/2014/02/Hermione-in-HP7-part-2_1680x1050.jpg -->
+            <img class="resize_index" src="{{ url_for('static', filename='07.jpeg') }}"/>
+        </div>
+        <div class="slides fade">
+            <!-- 08 - https://upload.wikimedia.org/wikipedia/commons/thumb/b/b2/Amelia_Earhart_standing_under_nose_of_her_Lockheed_Model_10-E_Electra%2C_small.jpg/1200px-Amelia_Earhart_standing_under_nose_of_her_Lockheed_Model_10-E_Electra%2C_small.jpg -->
+            <img class="resize_index" src="{{ url_for('static', filename='08.jpeg') }}"/>
+        </div>
+        <div class="slides fade">
+            <!-- 09 - https://userscontent2.emaze.com/images/afeeeae0-6192-4a85-bb62-a1deb6c5e1ac/e6a3627e071e616f83bdf96ce6efad2e.jpg -->
+            <img class="resize_index" src="{{ url_for('static', filename='09.jpeg') }}"/>
+        </div>
+        <div class="slides fade">
+            <!-- 10 - http://www.awardsdaily.com/wp-content/uploads/2016/02/hollywood-portfolio-2016-annie-leibovitz-04.jpg -->
+            <img class="resize_index2" src="{{ url_for('static', filename='10.jpeg') }}"/>
+        </div>
+    </div>
+{% endblock %}

@@ -1,0 +1,96 @@
+{% extends "layout.html" %}
+
+{% block title %}
+    Round 1: She said what?
+{% endblock %}
+
+{% block main %}
+    <!-- Sources: -->
+    <!-- Q0 & Q3 & Q7-8 - https://www.huffingtonpost.com/samantha-ettus/100-quotes-from-100-extraordinary-women_b_6483622.html -->
+    <!-- Q1-2 & Q5-6 - https://www.huffingtonpost.com/entry/16-quotes-from-women-who-made-history_us_58c07355e4b0ed7182699a54 -->
+    <!-- Q9 - http://stylecaster.com/beauty/strong-women-quotes/ -->
+    <!-- Q10-15 - http://www.keepinspiring.me/inspirational-quotes-for-women/#ixzz4zrQze7Ov -->
+    <!-- Q16-17 & Q19 - https://www.rd.com/culture/womens-history-quotes/ -->
+    <!-- Q18 - https://www.brainyquote.com/quotes/hillary_clinton_458736 -->
+
+    <div style="padding:10px">
+        <p><h3 class="instructions1">Match the quote with it's badass, inspiring, and thoughtful author.</h3></p>
+    </div>
+    <div class="top">
+        <table class="table table-striped">
+            <tbody>
+                {% for key, dict_item in parent_dict.items() %}
+                    <tr>
+                        <td class="qa" style="color:white;font-size:110%;">{{ key }}</td>
+                        {% for value in dict_item %}
+                            <td class="qa" style="color:white;font-size:110%;">{{ value }}</td>
+                        {% endfor %}
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+    <div class="bottom">
+        <form action="{{ url_for('one') }}" method="post">
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th> </th>
+                        <th>A</th>
+                        <th>B</th>
+                        <th>C</th>
+                        <th>D</th>
+                        <th>E</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>1.</td>
+                        <td><input autocomplete="off" autofocus class="form-control" name="q1" type="radio" id="q1a" value="A"/></td>
+                        <td><input autocomplete="off" autofocus class="form-control" name="q1" type="radio" id="q1b" value="B"/></td>
+                        <td><input autocomplete="off" autofocus class="form-control" name="q1" type="radio" id="q1c" value="C"/></td>
+                        <td><input autocomplete="off" autofocus class="form-control" name="q1" type="radio" id="q1d" value="D"/></td>
+                        <td><input autocomplete="off" autofocus class="form-control" name="q1" type="radio" id="q1e" value="E"/></td>
+                    </tr>
+                    <tr>
+                        <td>2.</td>
+                        <td><input autocomplete="off" autofocus class="form-control" name="q2" type="radio" id="q2a" value="A"/></td>
+                        <td><input autocomplete="off" autofocus class="form-control" name="q2" type="radio" id="q2b" value="B"/></td>
+                        <td><input autocomplete="off" autofocus class="form-control" name="q2" type="radio" id="q2c" value="C"/></td>
+                        <td><input autocomplete="off" autofocus class="form-control" name="q2" type="radio" id="q2d" value="D"/></td>
+                        <td><input autocomplete="off" autofocus class="form-control" name="q2" type="radio" id="q2e" value="E"/></td>
+                    </tr>
+                    <tr>
+                        <td>3.</td>
+                        <td><input autocomplete="off" autofocus class="form-control" name="q3" type="radio" id="q3a" value="A"/></td>
+                        <td><input autocomplete="off" autofocus class="form-control" name="q3" type="radio" id="q3b" value="B"/></td>
+                        <td><input autocomplete="off" autofocus class="form-control" name="q3" type="radio" id="q3c" value="C"/></td>
+                        <td><input autocomplete="off" autofocus class="form-control" name="q3" type="radio" id="q3d" value="D"/></td>
+                        <td><input autocomplete="off" autofocus class="form-control" name="q3" type="radio" id="q3e" value="E"/></td>
+                    </tr>
+                    <tr>
+                        <td>4.</td>
+                        <td><input autocomplete="off" autofocus class="form-control" name="q4" type="radio" id="q4a" value="A"/></td>
+                        <td><input autocomplete="off" autofocus class="form-control" name="q4" type="radio" id="q4b" value="B"/></td>
+                        <td><input autocomplete="off" autofocus class="form-control" name="q4" type="radio" id="q4c" value="C"/></td>
+                        <td><input autocomplete="off" autofocus class="form-control" name="q4" type="radio" id="q4d" value="D"/></td>
+                        <td><input autocomplete="off" autofocus class="form-control" name="q4" type="radio" id="q4e" value="E"/></td>
+                    </tr>
+                    <tr>
+                        <td>5.</td>
+                        <td><input autocomplete="off" autofocus class="form-control" name="q5" type="radio" id="q5a" value="A"/></td>
+                        <td><input autocomplete="off" autofocus class="form-control" name="q5" type="radio" id="q5b" value="B"/></td>
+                        <td><input autocomplete="off" autofocus class="form-control" name="q5" type="radio" id="q5c" value="C"/></td>
+                        <td><input autocomplete="off" autofocus class="form-control" name="q5" type="radio" id="q5d" value="D"/></td>
+                        <td><input autocomplete="off" autofocus class="form-control" name="q5" type="radio" id="q5e" value="E"/></td>
+                    </tr>
+                </tbody>
+            </table>
+            <fieldset>
+                <div class="form-group">
+                    <button class="btn btn-default" type="submit">Next Round</button>
+                </div>
+            </fieldset>
+        </form>
+    </div>
+{% endblock %}

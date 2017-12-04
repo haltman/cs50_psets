@@ -1,0 +1,159 @@
+.container
+{
+    /* center contents */
+    margin-left: auto;
+    margin-right: auto;
+    text-align: center;
+}
+
+/* colors for navbar */
+.navbar-default .navbar-brand .blue
+{
+    color: #537fbe;
+}
+.navbar-default .navbar-brand .red
+{
+    color: #ea433b;
+}
+
+main .form-control
+{
+    /* center form controls */
+    display: inline-block;
+
+    /* override Bootstrap's 100% width for form controls */
+    width: auto;
+}
+
+main img
+{
+    /* constrain images on small screens */
+    max-width: 100%;
+}
+
+main td
+{
+    /* left-align tables' cells */
+    text-align: left;
+    margin: 0;
+    padding: 0;
+}
+
+.table {
+    max-width: 100%;
+    margin-bottom: 20px;
+}
+
+/* new game */
+.rules {
+    font-size: 120%;
+}
+
+/* round one */
+.top {
+    vertical-align: top;
+    display: inline-block;
+    position: relative;
+}
+
+.bottom {
+    position: relative;
+    margin: auto;
+    display: block;
+    max-width: 20%;
+    max-height: 5%;
+}
+
+/* round two */
+.btn_two {
+    display: inline-block;
+}
+
+#container {
+    text-align: center;
+}
+
+/* resize photos on different pages */
+.resize_winner {
+    max-width:30%;
+    max-height:30%;
+}
+
+.resize_loser {
+    max-width:50%;
+    max-height:50%;
+}
+
+.resize_index {
+    max-width:50%;
+    max-height:50%;
+}
+
+.resize_index2 {
+    max-width:60%;
+    max-height:20%;
+}
+
+/* colors for instructions and headers */
+.instructions1 {
+    color: #00CED1;
+}
+
+.instructions2 {
+    color: #BC8F8F;
+}
+
+.instructions3 {
+    color: #DB7093;
+}
+
+.red {
+    color: #ea433b;
+}
+
+.light_blue {
+    color: #B0E0E6;
+}
+
+/* history and leader board tables */
+.boards {
+    font-size: 120%;
+}
+
+.boards_div {
+    display: inline-block;
+    position: relative;
+}
+
+/* slideshow on index page */
+.slideshow-container {
+    max-width: 1000px;
+    position: relative;
+    margin: auto;
+    padding:10px;
+}
+
+.slides {
+    display: none;
+}
+
+/* fading animation for slideshow */
+.fade {
+    -webkit-animation-name: fade;
+    -webkit-animation-duration: 3s;
+    -moz-animation-name: fade;
+    -moz-animation-duration: 3s;
+    animation-name: fade;
+    animation-duration: 3s;
+}
+
+@-webkit-keyframes fade {
+    from {opacity: .2}
+    to {opacity: 1}
+}
+
+@keyframes fade {
+    from {opacity: .2}
+    to {opacity: 1}
+}
+
