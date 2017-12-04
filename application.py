@@ -8,28 +8,28 @@ import json
 
 from helpers import *
 
-# global score of current game
+# global scores
 score = 0
 score_one = 0
 score_two = 0
 score_three = 0
 
-# global round number of current game
+# global round number
 round_num = 0
 
-# global list of questions/answers displayed in current play
+# global list of random questions/answers for round one
 nums = list()
 
-# global number of questions already answered
+# global count of questions answered in round three
 num_q = 0
 
-# global list of randomly ordered categories
+# global list of randomly ordered categories for round three
 cat_list = list()
 
-# global answer key
+# global answer key for round one
 answer_key_one = dict()
 
-# global answer map
+# global answer map for round three
 answer_map_three = dict()
 
 # configure application
@@ -56,7 +56,7 @@ db = SQL("sqlite:///flow.db")
 @app.route("/")
 @login_required
 def index():
-    """Show user's home page"""
+    """User's home page"""
 
     # identify user's username
     username = db.execute("SELECT username FROM users WHERE id = :id", id=session["user_id"])
@@ -145,7 +145,7 @@ def register():
 @app.route("/new")
 @login_required
 def new():
-    """Play a new game."""
+    """Start a new game."""
 
     return render_template("new.html")
 
@@ -154,7 +154,7 @@ def new():
 def one():
     """Round 1."""
 
-    # access global variables to modify them
+    # access global variables
     global score
     global score_one
     global round_num
@@ -239,7 +239,7 @@ def one():
 def two():
     """Round 2."""
 
-    # access global variables to modify them
+    # access global variables
     global score
     global score_two
     global round_num
@@ -259,7 +259,7 @@ def two():
             if answer_key_two[key] == answer_map_two[key]:
                 score_two = score_two + 1
 
-        # redirect user to third round if answered 5 or more questions correctly
+        # redirect user to third round if answered 3 or more questions correctly
         if score_two >= 3:
             flash("Round 2 Complete!")
             score = score + score_two
@@ -289,7 +289,7 @@ def two():
 def three():
     """Round 3."""
 
-    # access global variables to modify them
+    # access global variables
     global score
     global score_three
     global round_num
@@ -311,6 +311,7 @@ def three():
         # check round three score and determine if winner or loser
         if num_q == 4:
 
+            # create answer key
             answer_key_three = anskey("round_three")
 
             # compare user's responses to answer key and update score
@@ -323,7 +324,7 @@ def three():
             answer_map_three = {}
             cat_list = ()
 
-            # redirect user to third round if answered 5 or more questions correctly
+            # redirect user to third round if answered 3 or more questions correctly
             if score_three >= 3:
                 flash("Round 3 Complete!")
                 score = score + score_three
@@ -371,21 +372,23 @@ def three():
 def loser():
     """User loses the game."""
 
-    # determine if user earned their highest score yet
+    # determine if user earned their highest score
     result = db.execute("SELECT MAX(score) as score FROM history WHERE user_id = :user_id GROUP BY user_id", user_id=session["user_id"])
     if len(result) == 0:
 
-        # set high score flag to 1/true if first game played
+        # set high score flag to true if first game played
         high_score = 'Y'
 
     elif result[0]["score"] < score:
 
-        # set high score flag to 1/true if score of current game higher than any previous games played
+        # set high score flag to true if score of current game higher than previous games played
         high_score = 'Y'
 
-        # reset high score flag to 0/false for previously highest-scoring game record in history table
+        # reset high score flag to false for previously highest-scoring game record
         db.execute("UPDATE history SET high_score = 'N' WHERE user_id = :user_id AND high_score = 'Y'", user_id=session["user_id"])
     else:
+
+        # otherwise not a high score
         high_score = 'N'
 
     # insert record of game played into history table
@@ -398,21 +401,23 @@ def loser():
 def winner():
     """User wins the game."""
 
-    # determine if user earned their highest score yet
+    # determine if user earned their highest score
     result = db.execute("SELECT MAX(score) as score FROM history WHERE user_id = :user_id GROUP BY user_id", user_id=session["user_id"])
     if len(result) == 0:
 
-        # set high score flag to 1/true if first game played
+        # set high score flag to true if first game played
         high_score = 'Y'
 
     elif result[0]["score"] < score:
 
-        # set high score flag to 1/true if score of current game higher than any previous games played
+        # set high score flag to true if score of current game higher than any previous games played
         high_score = 'Y'
 
-        # reset high score flag to 0/false for previously highest-scoring game record in history table
+        # reset high score flag to false for previously highest-scoring game record
         db.execute("UPDATE history SET high_score = 'N' WHERE user_id = :user_id AND high_score = 'Y'", user_id=session["user_id"])
     else:
+
+        # otherwise not a high score
         high_score = 'N'
 
     # insert record of game played into history table
@@ -423,7 +428,7 @@ def winner():
 @app.route("/history")
 @login_required
 def history():
-    """Show history of all games played."""
+    """History of all games played by user."""
 
     # query database for all games played by user
     rows = db.execute("SELECT score, high_score, date, round_num FROM history WHERE user_id = :user_id", user_id=session["user_id"])
@@ -433,8 +438,9 @@ def history():
 @app.route("/leader")
 @login_required
 def leader():
-    """Check game's leader board."""
+    """Flow Leader Board."""
 
+    # query database for top 5 scores of all time
     rows = db.execute("SELECT u.username, MAX(h.score) as score, h.date FROM history h JOIN users u ON h.user_id=u.id GROUP BY u.username ORDER BY MAX(h.score) DESC LIMIT 5")
 
     return render_template("leader.html", rows=rows)

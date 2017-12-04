@@ -15,14 +15,6 @@
 {
     color: #ea433b;
 }
-.navbar-default .navbar-brand .yellow
-{
-    color: #f5b82e;
-}
-.navbar-default .navbar-brand .green
-{
-    color: #2e944b;
-}
 
 main .form-control
 {
@@ -52,6 +44,12 @@ main td
     margin-bottom: 20px;
 }
 
+/* new game */
+.rules {
+    font-size: 120%;
+}
+
+/* round one */
 .top {
     vertical-align: top;
     display: inline-block;
@@ -66,6 +64,7 @@ main td
     max-height: 5%;
 }
 
+/* round two */
 .btn_two {
     display: inline-block;
 }
@@ -74,6 +73,7 @@ main td
     text-align: center;
 }
 
+/* resize photos on different pages */
 .resize_winner {
     max-width:30%;
     max-height:30%;
@@ -94,6 +94,7 @@ main td
     max-height:20%;
 }
 
+/* colors for instructions and headers */
 .instructions1 {
     color: #00CED1;
 }
@@ -114,6 +115,7 @@ main td
     color: #B0E0E6;
 }
 
+/* history and leader board tables */
 .boards {
     font-size: 120%;
 }
@@ -123,10 +125,7 @@ main td
     position: relative;
 }
 
-.rules {
-    font-size: 120%;
-}
-
+/* slideshow on index page */
 .slideshow-container {
     max-width: 1000px;
     position: relative;
@@ -138,7 +137,7 @@ main td
     display: none;
 }
 
-/* Fading animation */
+/* fading animation for slideshow */
 .fade {
     -webkit-animation-name: fade;
     -webkit-animation-duration: 3s;

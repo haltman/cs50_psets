@@ -19,14 +19,14 @@ var answerMapThree = {};
 // set timer
 var secondsBeforeExpire = 28;
 
-// list of available answers
+// list of available answers in round three by category
 var availableAnswers = [];
 
 // execute when the DOM is fully loaded
 $(function() {
 
     // Index
-    // start slideshow of photos when on home page
+    // start slideshow of photos when on '/'
     if ($("#index").length > 0) {
         showSlides();
     }
@@ -44,6 +44,7 @@ $(function() {
         }
 
         // show next photo
+        // start slideshow again if reach last photo
         slideIndex++;
         if (slideIndex > slides.length) {slideIndex = 1}
         slides[slideIndex-1].style.display = "block";
@@ -53,8 +54,8 @@ $(function() {
     }
 
     // Round 2
+    // start timer on delay when on '/two'
     if ($("#container").length > 0) {
-        // start timer on delay
         setTimeout(function () { timerFn(); }, 3000);
     }
 
@@ -72,7 +73,7 @@ $(function() {
         }
     });
 
-    // click listener on before button
+    // click listener on 'before' button
     $("#before").click(function() {
 
         // store user's answer
@@ -86,7 +87,7 @@ $(function() {
             $(".year:visible").next().show().prev().hide();
         }
 
-        // disable 'next question' button when all questions completed
+        // disable 'before' and 'after' buttons when all questions completed
         else {
             $("#before").prop('disabled', true);
             $("#after").prop('disabled', true);
@@ -94,7 +95,7 @@ $(function() {
         return false;
     });
 
-    // click listener on after button
+    // click listener on 'after' button
     $("#after").click(function() {
 
         // store user's answer
@@ -108,7 +109,7 @@ $(function() {
             $(".year:visible").next().show().prev().hide();
         }
 
-        // disable 'next question' button when all questions completed
+        // disable 'before' and 'after' buttons when all questions completed
         else {
             $("#before").prop('disabled', true);
             $("#after").prop('disabled', true);
@@ -116,12 +117,12 @@ $(function() {
         return false;
     });
 
-    // send answer_map as a JSON object when form submitted by user
+    // send answer map as a JSON object when form two submitted by user
     $('#form_two').on('submit', function() {
         $('#answer_map_two').val(JSON.stringify(answerMapTwo));
     });
 
-    // create sound object
+    // creates sound objects
     function sound(src) {
         this.sound = document.createElement("audio");
         this.sound.src = src;
@@ -140,7 +141,7 @@ $(function() {
     // http://soundbible.com/1258-Tick-Tock.html
     tickTock = new sound("/static/timer.wav");
 
-    // https://forums.asp.net/t/1978552.aspx?jquery+1+7+countdown+timer+i+wants+to+disable+a+button+when+the+timer+gets+zero+ -->
+    // https://forums.asp.net/t/1978552.aspx?jquery+1+7+countdown+timer+i+wants+to+disable+a+button+when+the+timer+gets+zero+
     function timerFn () {
         var timerVar = setInterval(function () {
 
@@ -160,7 +161,7 @@ $(function() {
                 // play tick tock sound while timer running
                 tickTock.play();
 
-                // decrement time remaining
+                // decrement time by one second
                 secondsBeforeExpire--;
                 $("#timer").text(secondsBeforeExpire);
             }
@@ -183,7 +184,7 @@ $(function() {
         source: availableAnswers
     });
 
-    // send answer_map as a JSON object when form submitted by user
+    // send answer_map as a JSON object when form three submitted by user
     $("#final_answer").click(function() {
         answerMapThree[$(".questions_three:visible").text()] = $("#user_answer_three").val();
         $("#answer_map_three").val(JSON.stringify(answerMapThree));
@@ -193,6 +194,7 @@ $(function() {
     // http://soundbible.com/1830-Sad-Trombone.html
     loser = new sound("/static/loser.wav");
 
+    // play sad sound when user loses
     if ($("#loser").length > 0) {
         loser.play();
     }
@@ -201,6 +203,7 @@ $(function() {
     // http://soundbible.com/988-Applause.html
     winner = new sound("/static/winner.wav");
 
+    // play happy sound when user wins
     if ($("#winner").length > 0) {
         winner.play();
     }
