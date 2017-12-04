@@ -1,0 +1,40 @@
+{% extends "layout.html" %}
+
+{% block title %}
+    Leader Board
+{% endblock %}
+
+{% block main %}
+    <p style="padding:10px" align="center"><h3><span class="light_blue">Leader Board</span></h3></p>
+    <div class="boards_div" style="padding:10px">
+        <table class="table table-striped">
+            <thead>
+                <tr>
+                    <th> </th>
+                    <th class="boards">User</th>
+                    <th class="boards">Score</th>
+                    <th class="boards">Date</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for row in rows %}
+                    {% if loop.index == 1 %}
+                        <tr>
+                            <td class="boards light_blue"><b>{{ loop.index }}</b></td>
+                            <td class="boards light_blue"><b>{{ row.username }}</b></td>
+                            <td class="boards light_blue"><b>{{ row.score }}</b></td>
+                            <td class="boards light_blue"><b>{{ row.date }}</b></td>
+                        </tr>
+                    {% else %}
+                        <tr>
+                            <td class="boards">{{ loop.index }}</td>
+                            <td class="boards">{{ row.username }}</td>
+                            <td class="boards">{{ row.score }}</td>
+                            <td class="boards">{{ row.date }}</td>
+                        </tr>
+                    {% endif %}
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+{% endblock %}

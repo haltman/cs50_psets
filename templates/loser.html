@@ -1,0 +1,17 @@
+{% extends "layout.html" %}
+
+{% block title %}
+    Loser
+{% endblock %}
+
+{% block main %}
+    <div id="loser" style="padding:10px">
+        <p style="font-size:150%">
+            So close! Go with the <span class="red">Flow</span> and <a href="{{ url_for('new') }}">try again</a>.
+        </p>
+    </div>
+    <div style="padding:10px">
+        <!-- https://i.imgflip.com/t0udo.jpg?a419352 -->
+        <img class="resize_loser" src="{{ url_for('static', filename='loser.jpeg') }}"/>
+    </div>
+{% endblock %}
