@@ -65,12 +65,36 @@ main td
 }
 
 /* round two */
+#year_label {
+    display: inline-block;
+    font-size: 120%;
+    text-align: right;
+}
+
+#year {
+   display: inline-block;
+   text-align: center;
+}
+
 .btn_two {
     display: inline-block;
 }
 
 #container {
     text-align: center;
+}
+
+/* round three */
+.answers_three {
+    text-align: center;
+    vertical-align: middle;
+}
+.answers_three:hover {
+    background-color: #708090;
+}
+
+.selected {
+    background-color: #708090;
 }
 
 /* resize photos on different pages */
@@ -156,4 +180,3 @@ main td
     from {opacity: .2}
     to {opacity: 1}
 }
-

@@ -26,11 +26,17 @@ num_q = 0
 # global list of randomly ordered categories for round three
 cat_list = list()
 
-# global answer key for round one
+# global answer key and helper dict for round one
 answer_key_one = dict()
+ans_dict_post = dict()
 
 # global answer map for round three
 answer_map_three = dict()
+
+# global review of correct answers per round
+review_one = dict()
+review_two = dict()
+review_three = dict()
 
 # configure application
 app = Flask(__name__)
@@ -147,6 +153,36 @@ def register():
 def new():
     """Start a new game."""
 
+    # clear global variables
+    global score
+    score = 0
+    global score_one
+    score_one = 0
+    global score_two
+    score_two = 0
+    global score_three
+    score_three = 0
+    global round_num
+    round_num = 0
+    global nums
+    nums = list()
+    global num_q
+    num_q = 0
+    global cat_list
+    cat_list = list()
+    global answer_key_one
+    answer_key_one = dict()
+    global ans_dict_post
+    ans_dict_post = dict()
+    global answer_map_three
+    answer_map_three = dict()
+    global review_one
+    review_one = dict()
+    global review_two
+    review_two = dict()
+    global review_three
+    review_three = dict()
+
     return render_template("new.html")
 
 @app.route("/one", methods=["GET", "POST"])
@@ -160,29 +196,48 @@ def one():
     global round_num
     global nums
     global answer_key_one
+    global review_one
+    global ans_dict_post
 
     # if user reached route via POST (as by submitting a form via POST)
     if request.method == "POST":
 
-        # obtain user's responses
+        # obtain user's responses in letters
         responses = dict()
         for i in range(5):
             responses[i] = request.form.get("q" + str(i+1))
 
+        # convert user's reponses to names
+        i = 0
+        while True:
+            if i < 5:
+                for key in ans_dict_post:
+                    if responses[i] == key:
+                        review_one[i + 1].append(ans_dict_post[key])
+                        break
+                    elif responses[i] is None:
+                        review_one[i + 1].append(" ")
+                        break
+                i += 1
+            else:
+                break
+
         # compare user's responses to answer key and update score
         for i in range(5):
             if answer_key_one[i] == responses[i]:
+                review_one[i + 1].append("Correct :)")
                 score_one = score_one + 1
+            else:
+                review_one[i + 1].append("Incorrect :(")
 
-        # redirect user to second round if answered 3 or more questions correctly
+        # redirect user to review correct answers
         if score_one >= 3:
             flash("Round 1 Complete!")
-            score = score + score_one
-            round_num = round_num + 1
-            return redirect(url_for("two"))
 
-        else:
-            return redirect(url_for("loser"))
+        score = score + score_one
+        round_num = round_num + 1
+
+        return redirect(url_for("interim"))
 
     # else if user reached route via GET (as by clicking a link or via redirect)
     else:
@@ -214,21 +269,22 @@ def one():
         qa_dict = dict()
         ans_list_post = list(ans_list_pre)
         shuffle(ans_list_post)
-        ans_dict_post = dict()
         for char in "ABCDE":
             ans_dict_post[char] = ans_list_post[i]
             qa_dict[i + 1] = (rows[i]["question"], char, ans_list_post[i])
+            review_one[i + 1] = [rows[i]["question"]]
+            review_one[i + 1].append(ans_dict_pre[i])
             i += 1
 
         # create answer key
-        j = 0
+        i = 0
         while True:
-            if j < len(ans_list_pre):
+            if i < len(ans_list_pre):
                 for key in ans_dict_post:
-                    if ans_dict_pre[j] == ans_dict_post[key]:
-                        answer_key_one[j] = str(key)
+                    if ans_dict_pre[i] == ans_dict_post[key]:
+                        answer_key_one[i] = str(key)
                         break
-                j += 1
+                i += 1
             else:
                 break
 
@@ -243,6 +299,7 @@ def two():
     global score
     global score_two
     global round_num
+    global review_two
 
     # if user reached route via POST (as by submitting a form via POST)
     if request.method == "POST":
@@ -251,23 +308,31 @@ def two():
         answer_key_two = anskey("round_two")
 
         # obtain user's responses
-        jstr2 = request.form.get("answer_map_two")
-        answer_map_two = json.loads(jstr2)
+        jstr = request.form.get("answer_map_two")
+        answer_map_two = json.loads(jstr)
+
+        # obtain year associated with each question user answered
+        jstr = request.form.get("question_map_two")
+        question_map_two = json.loads(jstr)
 
         # compare user's responses to answer key and update score
+        i = 0
         for key in answer_map_two:
             if answer_key_two[key] == answer_map_two[key]:
+                review_two[i + 1] = [key, question_map_two[key], answer_key_two[key], answer_map_two[key], "Correct :)"]
                 score_two = score_two + 1
+            else:
+                review_two[i + 1] = [key, question_map_two[key], answer_key_two[key], answer_map_two[key], "Incorrect :("]
+            i += 1
 
-        # redirect user to third round if answered 3 or more questions correctly
+        # redirect user to review correct answers
         if score_two >= 3:
             flash("Round 2 Complete!")
-            score = score + score_two
-            round_num = round_num + 1
-            return redirect(url_for("three"))
 
-        else:
-            return redirect(url_for("loser"))
+        score = score + score_two
+        round_num = round_num + 1
+
+        return redirect(url_for("interim"))
 
     # else if user reached route via GET (as by clicking a link or via redirect)
     else:
@@ -296,6 +361,7 @@ def three():
     global num_q
     global answer_map_three
     global cat_list
+    global review_three
 
     # if user reached route via POST (as by submitting a form via POST)
     if request.method == "POST":
@@ -315,24 +381,24 @@ def three():
             answer_key_three = anskey("round_three")
 
             # compare user's responses to answer key and update score
+            i = 0
             for key in answer_map_three:
+                review_three[i + 1].append(answer_map_three[key])
                 if answer_key_three[key] == answer_map_three[key]:
+                    review_three[i + 1].append("Correct :)")
                     score_three = score_three + 1
+                else:
+                    review_three[i + 1].append("Incorrect :(")
+                i += 1
 
-            # reset global variables
-            num_q = 0
-            answer_map_three = {}
-            cat_list = ()
-
-            # redirect user to third round if answered 3 or more questions correctly
+            # redirect user to review correct answers
             if score_three >= 3:
                 flash("Round 3 Complete!")
-                score = score + score_three
-                round_num = round_num + 1
-                return redirect(url_for("winner"))
 
-            else:
-                return redirect(url_for("loser"))
+            score = score + score_three
+            round_num = round_num + 1
+
+            return redirect(url_for("interim"))
 
         # otherwise continue round three
         else:
@@ -347,6 +413,9 @@ def three():
 
             # update question number
             num_q = num_q + 1
+
+            # update review material
+            review_three[num_q] = [category, questions[0], answers[0]]
 
             return render_template("three.html", category=category, questions=questions, answers=answers)
 
@@ -365,7 +434,34 @@ def three():
         # update question number
         num_q = num_q + 1
 
+        # create review material
+        review_three[num_q] = [category, questions[0], answers[0]]
+
         return render_template("three.html", category=category, questions=questions, answers=answers)
+
+@app.route("/interim")
+@login_required
+def interim():
+    """Between rounds."""
+
+    # access global variables
+    global round_num
+    global score_one
+    global score_two
+    global score_three
+    global review_one
+    global review_two
+    global review_three
+
+    # display correct answers to user and redirect to next round
+    if (round_num == 1):
+        return render_template("interim.html", round_num=round_num, score_one=score_one, parent_dict=review_one)
+
+    elif (round_num == 2):
+        return render_template("interim.html", round_num=round_num, score_two=score_two, parent_dict=review_two)
+
+    elif (round_num == 3):
+        return render_template("interim.html", round_num=round_num, score_three=score_three, parent_dict=review_three)
 
 @app.route("/loser")
 @login_required
@@ -444,7 +540,3 @@ def leader():
     rows = db.execute("SELECT u.username, MAX(h.score) as score, h.date FROM history h JOIN users u ON h.user_id=u.id GROUP BY u.username ORDER BY MAX(h.score) DESC LIMIT 5")
 
     return render_template("leader.html", rows=rows)
-
-
-
-

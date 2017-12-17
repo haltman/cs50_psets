@@ -41,8 +41,9 @@
         {% endfor %}
     </div>
     <div>
+        <label for="year" id="year_label">Year: </label>
         {% for year in years %}
-            <p class="year" style="color:white;padding:10px;font-size:120%;">Year: {{ year }}</p>
+            <p class="year" id="year" style="color:white;padding:10px;font-size:120%;">{{ year }}</p>
         {% endfor %}
     </div>
     <div id="container">
@@ -60,6 +61,7 @@
             <fieldset>
                 <div class="form-group">
                     <input type="hidden" id="answer_map_two" name="answer_map_two" value="">
+                    <input type="hidden" id="question_map_two" name="question_map_two" value="">
                     <button class="btn btn-default" type="submit">Next Round</button>
                 </div>
             </fieldset>

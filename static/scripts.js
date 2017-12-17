@@ -12,15 +12,13 @@ var winner;
 
 // to store user's answers in round two
 var answerMapTwo = {};
+var questionMapTwo = {};
 
 // to store user's answers in round three
 var answerMapThree = {};
 
 // set timer
 var secondsBeforeExpire = 28;
-
-// list of available answers in round three by category
-var availableAnswers = [];
 
 // execute when the DOM is fully loaded
 $(function() {
@@ -78,6 +76,7 @@ $(function() {
 
         // store user's answer
         answerMapTwo[$(".questions_two:visible").text()] = $("#before").val();
+        questionMapTwo[$(".questions_two:visible").text()] = $(".year:visible").text();
 
         // check if next question exists
         if ($(".questions_two:visible").next().length != 0) {
@@ -100,6 +99,7 @@ $(function() {
 
         // store user's answer
         answerMapTwo[$(".questions_two:visible").text()] = $("#after").val();
+        questionMapTwo[$(".questions_two:visible").text()] = $(".year:visible").text();
 
         // check if next question exists
         if ($(".questions_two:visible").next().length != 0) {
@@ -120,9 +120,10 @@ $(function() {
     // send answer map as a JSON object when form two submitted by user
     $('#form_two').on('submit', function() {
         $('#answer_map_two').val(JSON.stringify(answerMapTwo));
+        $('#question_map_two').val(JSON.stringify(questionMapTwo));
     });
 
-    // creates sound objects
+    // create a sound object
     function sound(src) {
         this.sound = document.createElement("audio");
         this.sound.src = src;
@@ -176,17 +177,15 @@ $(function() {
         }
     });
 
-    // configure autocomplete
-    $(".answers_three").each(function(index) {
-        availableAnswers.push($(this).text());
-    });
-    $('#user_answer_three').autocomplete({
-        source: availableAnswers
+    // store user's answer on click and highlight clicked cell
+    $(".clickTable td").click(function () {
+        var clickedCell= this.innerText;
+        answerMapThree[$(".questions_three:visible").text()] = clickedCell;
+        $(this).addClass("selected");
     });
 
     // send answer_map as a JSON object when form three submitted by user
     $("#final_answer").click(function() {
-        answerMapThree[$(".questions_three:visible").text()] = $("#user_answer_three").val();
         $("#answer_map_three").val(JSON.stringify(answerMapThree));
     });
 

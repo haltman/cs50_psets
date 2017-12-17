@@ -69,23 +69,22 @@
         {% endfor %}
     </div>
     <div>
-        <form style="padding:10px" action="{{ url_for('three') }}" method="post">
-            <fieldset>
-                <div class="form-group" class="ui-widget">
-                    <input autofocus class="form-control" id="user_answer_three" name="user_answer_three" type="text">
-                    <input type="hidden" id="answer_map_three" name="answer_map_three" value="">
-                    <button class="btn btn-primary" type="submit" id="final_answer">Final Answer</button>
-                </div>
-            </fieldset>
-        </form>
-    </div>
-    <div>
         <div style="padding:10px">
-            <table class="table">
+            <table class="table clickTable">
                 {% for answer in answers %}
                     <td class="answers_three" style="color:white;width:10%;">{{ answer }}</td>
                 {% endfor %}
             </table>
         </div>
+    </div>
+    <div>
+        <form style="padding:10px" action="{{ url_for('three') }}" method="post">
+            <fieldset>
+                <div class="form-group" class="ui-widget">
+                    <input type="hidden" id="answer_map_three" name="answer_map_three" value="">
+                    <button class="btn btn-primary" type="submit" id="final_answer">Final Answer</button>
+                </div>
+            </fieldset>
+        </form>
     </div>
 {% endblock %}

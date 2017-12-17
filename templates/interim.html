@@ -1,0 +1,143 @@
+{% extends "layout.html" %}
+
+{% block title %}
+    Interim
+{% endblock %}
+
+{% block main %}
+    <div>
+        {% if round_num == 1 %}
+            <p style="padding:10px" align="center"><h3><span class="light_blue">Round 1 Review</span></h3></p>
+            <p style="padding:10px" align="center"><h4>You answered {{ score_one }} questions correctly in this round.</h4></p>
+            <div>
+                <table class="table table-striped">
+                    <thead>
+                        <tr>
+                            <th> </th>
+                            <th>Question</th>
+                            <th>Answer</th>
+                            <th>Your Answer</th>
+                            <th>Evaluation</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for key, dict_item in parent_dict.items() %}
+                            <tr>
+                                <td class="review" style="color:white;">{{ key }}</td>
+                                {% for value in dict_item %}
+                                    <td class="review" style="color:white;">{{ value }}</td>
+                                {% endfor %}
+                            </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+            {% if score_one >= 3 %}
+                <form style="padding:10px" id="interim" action="{{ url_for('two') }}" method="get">
+                    <fieldset>
+                        <div class="form-group">
+                            <button class="btn btn-default" type="submit">Next Round</button>
+                        </div>
+                    </fieldset>
+                </form>
+            {% else %}
+                <form style="padding:10px" id="interim" action="{{ url_for('loser') }}" method="get">
+                    <fieldset>
+                        <div class="form-group">
+                            <button class="btn btn-default" type="submit">Ready</button>
+                        </div>
+                    </fieldset>
+                </form>
+            {% endif %}
+        {% elif round_num == 2 %}
+            <p style="padding:10px" align="center"><h3><span class="light_blue">Round 2 Review</span></h3></p>
+            <p style="padding:10px" align="center"><h4>You answered {{ score_two }} questions correctly in this round.</h4></p>
+            <div>
+                <table class="table table-striped">
+                    <thead>
+                        <tr>
+                            <th> </th>
+                            <th>Question</th>
+                            <th>Year</th>
+                            <th>Answer</th>
+                            <th>Your Answer</th>
+                            <th>Evaluation</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for key, dict_item in parent_dict.items() %}
+                            <tr>
+                                <td class="review" style="color:white;">{{ key }}</td>
+                                {% for value in dict_item %}
+                                    <td class="review" style="color:white;">{{ value }}</td>
+                                {% endfor %}
+                            </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+            {% if score_two >= 3 %}
+                <form style="padding:10px" id="interim" action="{{ url_for('three') }}" method="get">
+                    <fieldset>
+                        <div class="form-group">
+                            <button class="btn btn-default" type="submit">Next Round</button>
+                        </div>
+                    </fieldset>
+                </form>
+            {% else %}
+                <form style="padding:10px" id="interim" action="{{ url_for('loser') }}" method="get">
+                    <fieldset>
+                        <div class="form-group">
+                            <button class="btn btn-default" type="submit">Ready</button>
+                        </div>
+                    </fieldset>
+                </form>
+            {% endif %}
+        {% elif round_num == 3 %}
+            <p style="padding:10px" align="center"><h3><span class="light_blue">Round 3 Review</span></h3></p>
+            <p style="padding:10px" align="center"><h4>You answered {{ score_three }} questions correctly in this round.</h4></p>
+            <div>
+                <table class="table table-striped">
+                    <thead>
+                        <tr>
+                            <th> </th>
+                            <th>Category</th>
+                            <th>Question</th>
+                            <th>Answer</th>
+                            <th>Your Answer</th>
+                            <th>Evaluation</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for key, dict_item in parent_dict.items() %}
+                            <tr>
+                                <td class="review" style="color:white;">{{ key }}</td>
+                                {% for value in dict_item %}
+                                    <td class="review" style="color:white;">{{ value }}</td>
+                                {% endfor %}
+                            </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+            {% if score_three >= 3 %}
+                <form style="padding:10px" id="interim" action="{{ url_for('winner') }}" method="get">
+                    <fieldset>
+                        <div class="form-group">
+                            <button class="btn btn-default" type="submit">Ready</button>
+                        </div>
+                    </fieldset>
+                </form>
+            {% else %}
+                <form style="padding:10px" id="interim" action="{{ url_for('loser') }}" method="get">
+                    <fieldset>
+                        <div class="form-group">
+                            <button class="btn btn-default" type="submit">Ready</button>
+                        </div>
+                    </fieldset>
+                </form>
+            {% endif %}
+        {% endif %}
+    </div>
+{% endblock %}
+
