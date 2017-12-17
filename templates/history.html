@@ -1,0 +1,40 @@
+{% extends "layout.html" %}
+
+{% block title %}
+    History
+{% endblock %}
+
+{% block main %}
+    <p style="padding:10px" align="center"><h3><span class="light_blue">User History</span></h3></p>
+    <div class="boards_div" style="padding:10px">
+        <table class="table table-striped">
+            <thead>
+                <tr>
+                    <th class="boards">Score</th>
+                    <th class="boards">Round</th>
+                    <th class="boards">Date</th>
+                    <th class="boards">High Score</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for row in rows %}
+                    {% if row.high_score == 'Y' %}
+                        <tr>
+                            <td class="boards light_blue"><b>{{ row.score }}</b></td>
+                            <td class="boards light_blue"><b>{{ row.round_num }}</b></td>
+                            <td class="boards light_blue"><b>{{ row.date }}</b></td>
+                            <td class="boards light_blue"><b>{{ row.high_score }}</b></td>
+                        </tr>
+                    {% else %}
+                        <tr>
+                            <td class="boards">{{ row.score }}</td>
+                            <td class="boards">{{ row.round_num }}</td>
+                            <td class="boards">{{ row.date }}</td>
+                            <td class="boards">{{ row.high_score }}</td>
+                        </tr>
+                    {% endif %}
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+{% endblock %}

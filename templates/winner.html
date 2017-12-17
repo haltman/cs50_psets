@@ -1,0 +1,17 @@
+{% extends "layout.html" %}
+
+{% block title %}
+    Winner!
+{% endblock %}
+
+{% block main %}
+    <div id="winner" style="padding:10px">
+        <p style="font-size:150%">
+            Winner! Winner! Congratulations, you have successfully navigated and conquered the <span class="red">Flow</span>. Now spread the knowledge!
+        </p>
+    </div>
+    <div style="padding:10px">
+        <!-- https://mattsko.files.wordpress.com/2017/03/wonder-woman-2-gif.gif?w=500&zoom=2 -->
+        <img class="resize_winner" src="{{ url_for('static', filename='winner.gif') }}"/>
+    </div>
+{% endblock %}

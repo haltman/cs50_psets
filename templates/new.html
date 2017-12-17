@@ -1,0 +1,40 @@
+{% extends "layout.html" %}
+
+{% block title %}
+    New Game
+{% endblock %}
+
+{% block main %}
+    <div style="padding:10px">
+        <p><h3>How to Play:</h3></p>
+        <p class="rules">
+            Welcome to <b><span class="red">Flow</span></b>! Get ready for some estrogen-infused fun.
+        </p>
+        <p class="rules">
+            When you're ready, select the 'Start' button below.
+        </p>
+        <p class="rules">
+            You will begin in <b><span class="instructions1">Round 1: She said what?</span></b>, where you will have to match famous quotes with their authors.
+        </p>
+        <p class="rules">
+            If you match 3 out of the 5 quotes correctly, you will advance to <b><span class="instructions2">Round 2: Who's on first?</span></b>
+        </p>
+        <p class="rules">
+            There you must select whether each 'first' for women in American history occurred before or after the year displayed.
+        </p>
+        <p class="rules">
+            Choose correctly at least 3 times in the 28 seconds alloted and move on to the last and final <b><span class="instructions3">Round 3: Name that woman!</span></b>
+        </p>
+        <p class="rules">
+            Read a prompt from each of the 4 categories (Pop Culture, Politics, Arts, Sports) and select the woman it's describing.
+        </p>
+        <p class="rules">
+            Choose 3 or more women correctly and you win!
+        </p>
+    </div>
+    <div>
+        <form action="{{ url_for('one') }}" method="get">
+            <button class="btn btn-primary" type="submit" style="font-size:140%;text-align:center;">Start</button>
+        </form>
+    </div>
+{% endblock %}

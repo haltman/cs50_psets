@@ -1,0 +1,70 @@
+{% extends "layout.html" %}
+
+{% block title %}
+    Round 2: Who's on first?
+{% endblock %}
+
+{% block main %}
+    <!-- Sources: -->
+    <!-- Q0 - http://www.americaslibrary.gov/jb/revolut/jb_revolut_poetslav_3.html -->
+    <!-- Q1 - https://www.ranker.com/list/madam-cj-walker-facts/amandasedlakhevener -->
+    <!-- Q2 - http://www.amazingwomeninhistory.com/elizabeth-blackwell-first-female-doctor/ -->
+    <!-- Q3 - https://www.encyclopedia.com/people/history/us-history-biographies/oveta-culp-hobby -->
+    <!-- Q4 - https://www.biography.com/people/anna-bissell-032216 -->
+    <!-- Q5 - https://www.nasa.gov/multimedia/imagegallery/image_feature_2533.html -->
+    <!-- Q6 - http://www.history.com/topics/sandra-day-oconnor -->
+    <!-- Q7 - http://www.history.com/this-day-in-history/jeannette-rankin-becomes-first-u-s-congresswoman -->
+    <!-- Q8 - http://www.history.com/this-day-in-history/american-woman-climbs-everest -->
+    <!-- Q9 - https://www.biography.com/people/amelia-earhart-9283280 -->
+    <!-- Q10 - http://www.womenhistoryblog.com/2008/09/lydia-chapin-taft.html -->
+    <!-- Q11 - https://www.theatlantic.com/politics/archive/2016/07/hillary-clinton-first-female-presidential-nominee/493163/ -->
+    <!-- Q12 - https://www.atlasobscura.com/articles/the-first-american-woman-to-win-an-olympic-championship-didnt-even-know-it -->
+    <!-- Q13 - http://www.americaslibrary.gov/jb/nation/jb_nation_maryk_1.html -->
+    <!-- Q14 - http://www.govexec.com/management/2016/04/who-was-first-woman-depicted-american-currency/127793/ -->
+    <!-- Q15 - https://www.grammy.com/grammys/news/grammys-trailblazing-women-part-two -->
+    <!-- Q16 - https://www.forbes.com/sites/briansolomon/2014/01/06/janet-yellen-confirmed-as-federal-reserve-chair/#1d7f20fa4558 -->
+    <!-- Q17 - http://www.history.com/this-day-in-history/kathryn-bigelow-becomes-the-first-female-director-to-win-an-oscar -->
+    <!-- Q18 - http://www.womenhistoryblog.com/2014/06/first-women-newspaper-editors.html -->
+    <!-- Q19 - http://www.history.com/this-day-in-history/rock-and-roll-hall-of-fame-inducts-first-woman -->
+
+    <div style="padding:10px">
+        <p><h3 class="instructions2">Before or After? 28 seconds to answer as many as you can!</h3></p>
+    </div>
+    <div>
+        <div style="padding:10px">
+            <label for="timer" style="font-size:120%;">Timer:</label><p id="timer" style="color:white;font-size:120%;"></p>
+        </div>
+    </div>
+    <div>
+        {% for question in questions %}
+            <p class="questions_two" style="color:white;padding:10px;font-size:120%;">{{ question }}</p>
+        {% endfor %}
+    </div>
+    <div>
+        <label for="year" id="year_label">Year: </label>
+        {% for year in years %}
+            <p class="year" id="year" style="color:white;padding:10px;font-size:120%;">{{ year }}</p>
+        {% endfor %}
+    </div>
+    <div id="container">
+        <form style="padding:10px">
+            <fieldset>
+                <div class="form-group">
+                    <button class="btn btn-primary btn_two" type="submit" id="before" value="before">Before</button>
+                    <button class="btn btn-primary btn_two" type="submit" id="after" value="after">After</button>
+                </div>
+            </fieldset>
+        </form>
+    </div>
+    <div>
+        <form style="padding:10px" id="form_two" action="{{ url_for('two') }}" method="post">
+            <fieldset>
+                <div class="form-group">
+                    <input type="hidden" id="answer_map_two" name="answer_map_two" value="">
+                    <input type="hidden" id="question_map_two" name="question_map_two" value="">
+                    <button class="btn btn-default" type="submit">Next Round</button>
+                </div>
+            </fieldset>
+        </form>
+    </div>
+{% endblock %}
